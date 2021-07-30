@@ -61,14 +61,20 @@ module.exports = {
       return res.json(`server error`);
     }
 
+    let createParams = {
+      firstName: validatedParams.firstName,
+      lastName: validatedParams.lastName,
+      email: validatedParams.email,
+      hash: hash,
+    };
+
+    if (req.file) {
+      createParams.image = req.file.path;
+    }
+
     // create user
     try {
-      user = await UserModel.create({
-        firstName: validatedParams.firstName,
-        lastName: validatedParams.lastName,
-        email: validatedParams.email,
-        hash: hash,
-      });
+      user = await UserModel.create(createParams);
     } catch (err) {
       console.log(err);
       res.statusCode = 500;
