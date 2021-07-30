@@ -343,7 +343,10 @@ module.exports = {
 
     // ensuring that user exists
     let verifiedUser = null;
-
+    if (!mongoose.Types.ObjectId.isValid(req.params.userID )) {
+      res.statusCode = 403;
+      return res.json();
+    }
     try {
       verifiedUser = await UserModel.findOne({ _id: req.params.userID });
     } catch (err) {
@@ -355,7 +358,7 @@ module.exports = {
       res.statusCode = 404;
       return res.json(`unable to find user`);
     }
-
+    console.log(verifiedUser)
     res.statusCode = 200;
     return res.json(verifiedUser);
   },

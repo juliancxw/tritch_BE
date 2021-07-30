@@ -7,6 +7,7 @@ const { commentsValidator } = require("../validations/comments_validation");
 module.exports = {
   //show comments under itineray
   showitinerarycomments: (req, res) => {
+    console.log("hello")
     if (!mongoose.Types.ObjectId.isValid(req.params.itineraries)) {
       res.statusCode = 400;
       return res.json();
@@ -20,7 +21,7 @@ module.exports = {
           res.statusCode = 404;
           return res.json();
         }
-
+        console.log(response)
         return res.json(response);
       })
       .catch((err) => {
