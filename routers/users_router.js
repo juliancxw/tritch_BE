@@ -15,6 +15,8 @@ const cloudinaryStorageStrategy = new CloudinaryStorage({
   },
 });
 
+const uploadParser = multer({ storage: cloudinaryStorageStrategy });
+
 // ROUTES //
 
 router.post(
