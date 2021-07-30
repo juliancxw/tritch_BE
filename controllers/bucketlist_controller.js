@@ -180,7 +180,7 @@ module.exports = {
         res.statusCode = 500;
         return res.json(err);
       }
-    
+      res.statusCode = 200;
         console.log(`the ${data}`);
         return res.json(data);
       
