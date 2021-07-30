@@ -165,6 +165,7 @@ module.exports = {
     if (!mongoose.Types.ObjectId.isValid(req.params.userID, req.params.itineraryID)) {
       res.statusCode = 400;
       return res.json(`error!`);
+      console.log("ouch")
     }
 
     await BucketlistModel.find({
