@@ -1,7 +1,6 @@
 const Joi = require("joi");
 
 module.exports = {
-
   schemaValidator: Joi.object({
     firstName: Joi.string().required().min(1).max(30).messages({
       "string.base": `"First Name" should be a type of 'text'`,
@@ -34,6 +33,7 @@ module.exports = {
       "any.required": `"password" is a required field`,
     }),
 
+    image: Joi.string(),
   }),
 
   loginValidator: Joi.object({
