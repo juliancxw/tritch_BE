@@ -1,11 +1,27 @@
 const express = require("express");
 const router = express.Router();
+const upload = multer({ dest: "uploads/" });
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
 const userController = require("../controllers/users_controller");
 const { authenticated, unauthenticated } = require("../middlewares/user_auth");
 
+const cloudinaryStorageStrategy = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "tritch_BE",
+  },
+});
+
 // ROUTES //
 
-router.post("/register", unauthenticated, userController.register);
+router.post(
+  "/register",
+  uploadParser.single("image"),
+  unauthenticated,
+  userController.register
+);
 
 router.post("/login", unauthenticated, userController.login);
 
