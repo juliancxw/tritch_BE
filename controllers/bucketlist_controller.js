@@ -180,7 +180,7 @@ module.exports = {
           return res.json(`Oops! Server error`);
         }
         res.statusCode = 200;
-        console.log(`the ${response});
+        console.log(`the ${response}`);
         return res.json(response);
       })
       .catch((err) => {
