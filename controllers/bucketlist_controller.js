@@ -167,26 +167,23 @@ module.exports = {
       return res.json(`error!`);
       
     }
-
-    await BucketlistModel.find({
-      user: req.params.userID,
-      itineraries: req.params.itineraryID
-    })
-      .populate("itineraries")
-      .populate("user")
-      .then((response) => {
-        if (!response) {
-          res.statusCode = 500;
-          return res.json(`Oops! Server error`);
-        }
-        res.statusCode = 200;
-        console.log(`the ${response}`);
-        return res.json(response);
+    let data
+    try{
+      data = await BucketlistModel.find({
+        user: req.params.userID,
+        itineraries: req.params.itineraryID
       })
-      .catch((err) => {
+        .populate("itineraries")
+        .populate("user")
+      }
+      catch(err){
         res.statusCode = 500;
         return res.json(err);
-      });
+      }
+    
+        console.log(`the ${data}`);
+        return res.json(data);
+      
   },
   
 };
