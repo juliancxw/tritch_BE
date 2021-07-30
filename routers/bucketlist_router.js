@@ -13,4 +13,6 @@ router.delete("/remove", authenticated, bucketlistController.delete);
 
 router.get("/:userID/view", bucketlistController.show);
 
+router.get("/:userID/:itineraryID", bucketlistController.getOne);
+
 module.exports = router;

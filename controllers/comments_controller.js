@@ -11,7 +11,7 @@ module.exports = {
     //   res.statusCode = 400;
     //   return res.json();
     // }
-    console.log(req.params.id)
+    
     CommentsModel.find({ itineraries: req.params.id })
       .populate("itineraries")
       .populate("user")

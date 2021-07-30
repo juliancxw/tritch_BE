@@ -161,4 +161,31 @@ module.exports = {
         return res.json(err);
       });
   },
+  getOne: async (req, res) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params.userID, req.params.itineraryID)) {
+      res.statusCode = 400;
+      return res.json(`error!`);
+    }
+
+    await BucketlistModel.find({
+      user: req.params.userID,
+      itineraries: req.params.itineraryID
+    })
+      .populate("itineraries")
+      .populate("user")
+      .then((response) => {
+        if (!response) {
+          res.statusCode = 500;
+          return res.json(`Oops! Server error`);
+        }
+        res.statusCode = 200;
+        console.log(response);
+        return res.json(response);
+      })
+      .catch((err) => {
+        res.statusCode = 500;
+        return res.json(err);
+      });
+  },
+  
 };
