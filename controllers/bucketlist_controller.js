@@ -162,7 +162,7 @@ module.exports = {
       });
   },
   getOne: async (req, res) => {
-    if (!mongoose.Types.ObjectId.isValid(req.params.userID, req.params.itineraryID)) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.itineraryID)) {
       res.statusCode = 400;
       return res.json(`error!`);
       
@@ -170,7 +170,6 @@ module.exports = {
     let data
     try{
       data = await BucketlistModel.find({
-        user: req.params.userID,
         itineraries: req.params.itineraryID
       })
         .populate("itineraries")
